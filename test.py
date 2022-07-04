@@ -24,32 +24,32 @@ class TestCaseBTreeRefactoring(unittest.TestCase):
 
     @unittest.skip
     def test_search_many(self) -> None:
-        tree_new = BTree(3)
+        tree = BTree(3)
 
         for val in self.test_values:
-            tree_new.insert(TreeKeyValue(val, val))
+            tree.insert(TreeKeyValue(val, val))
 
-        BTreeValidator.validate(tree_new)
+        BTreeValidator.validate(tree)
 
-        lost_keys = self._check_if_keys_not_in_tree(self.test_values, tree_new)
+        lost_keys = self._check_if_keys_not_in_tree(self.test_values, tree)
         self.assertEqual(lost_keys, [])
 
     def test_delete_many(self) -> None:
-        tree_new = BTree(3)
+        tree = BTree(3)
 
         for _, val in enumerate(self.test_values):
-            tree_new.insert(TreeKeyValue(val, val))
+            tree.insert(TreeKeyValue(val, val))
 
-        BTreeValidator.validate(tree_new)
+        BTreeValidator.validate(tree)
 
         keys_to_delete = (8,)
 
         for key in keys_to_delete:
-            tree_new.delete(key)
+            tree.delete(key)
 
-        BTreeValidator.validate(tree_new)
+        BTreeValidator.validate(tree)
 
-        lost_keys = self._check_if_keys_not_in_tree(keys_to_delete, tree_new)
+        lost_keys = self._check_if_keys_not_in_tree(keys_to_delete, tree)
         self.assertEqual(lost_keys, list(keys_to_delete))
 
 
